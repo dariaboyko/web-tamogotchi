@@ -1,9 +1,21 @@
+@import '../../../../../assets/styles/mat-styles.scss';
+
 .login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 600px;
+    width: 500px;
     background-color: white;
-    padding: 40px 20px;
+    padding: 20px;
     border-radius: 20px;
+    font-family: "Poppins", sans-serif;
+
+    &--title {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    &--form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
 }
