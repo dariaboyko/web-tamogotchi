@@ -23,7 +23,6 @@ export class AppComponent implements OnDestroy {
         )
       )
       .subscribe((event: NavigationEnd) => {
-        console.log(event)
         const includesLogin = event.url.includes('login');
         if (!this.loginService.getToken() && !includesLogin) {
           this.router.navigate(['/login']);

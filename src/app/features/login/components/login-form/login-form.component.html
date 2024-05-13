@@ -70,10 +70,11 @@
         Confirm Password is required
       </mat-error>
     </mat-form-field>
-    <div class="login-form--footer">
+    <div class="login-form--footer" style="gap: 10px;">
       <button mat-raised-button color="primary" type="submit" (click)="signUp()">
         Sign Up
       </button>
+      <button mat-button color="primary" (click)="generatePasswordOnClick()">Generate Password</button>
       <button mat-button color="accent" (click)="initSignInForm()" type="button"><mat-icon
           fontIcon="arrow_back"></mat-icon>Go
         Back</button>

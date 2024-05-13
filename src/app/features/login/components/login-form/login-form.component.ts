@@ -53,7 +53,6 @@ export class LoginFormComponent {
     this.signInForm.markAllAsTouched();
     this.signInForm.updateValueAndValidity();
     if (this.signInForm.valid) {
-      console.log(this.signInForm);
     } else {
       // Handle form validation errors
     }
@@ -62,7 +61,6 @@ export class LoginFormComponent {
   signUp() {
     this.signUpForm.markAllAsTouched();
     if (this.signUpForm.valid) {
-      console.log(this.signUpForm);
     } else {
       // Handle form validation errors
     }
@@ -71,6 +69,14 @@ export class LoginFormComponent {
   public togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
     this.passwordType = this.showPassword ? 'text' : 'password';
+  }
+
+  public generatePasswordOnClick() {
+    const newPassword = this.generatePassword();
+    this.signUpForm.patchValue({
+      password: newPassword,
+      confirmPassword: newPassword
+    });
   }
 
   private passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
@@ -90,5 +96,14 @@ export class LoginFormComponent {
       : { mismatch: true };
   }
 
+  private generatePassword(length: number = 7): string {
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+    let password = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset[randomIndex];
+    }
+    return password;
+  }
 
 }
