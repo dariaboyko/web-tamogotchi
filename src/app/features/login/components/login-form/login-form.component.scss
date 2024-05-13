@@ -1,21 +1,33 @@
 @import '../../../../../assets/styles/mat-styles.scss';
 
 .login-form {
-    width: 500px;
+    width: 350px;
     background-color: white;
-    padding: 20px;
+    padding: 30px 20px 25px;
     border-radius: 20px;
     font-family: "Poppins", sans-serif;
 
     &--title {
         text-align: center;
         font-size: 24px;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
     }
 
     &--form {
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 8px;
+    }
+
+    &--footer {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+
+        ::ng-deep.mat-mdc-raised-button {
+            width: 100%;
+            margin-top: 15px;
+        }
     }
 }
