@@ -3,12 +3,12 @@
   <form [formGroup]="signInForm" class="login-form--form" *ngIf="showSignInForm">
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
-      <input matInput formControlName="username" />
+      <input matInput formControlName="email" />
       <mat-error *ngIf="
-                signInForm.get('username')?.errors?.['required']
+                signInForm.get('email')?.errors?.['required']
               ">Email is required</mat-error>
       <mat-error *ngIf="
-                        signInForm.get('username')?.errors?.['email']
+                        signInForm.get('email')?.errors?.['email']
                       ">The format doesn`t look right. Enter correct email.</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
@@ -35,12 +35,12 @@
   <form [formGroup]="signUpForm" class="login-form--form" *ngIf="showSignUpForm">
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
-      <input matInput formControlName="username" />
+      <input matInput formControlName="email" />
       <mat-error *ngIf="
-          signUpForm.get('username')?.errors?.['required']
+          signUpForm.get('email')?.errors?.['required']
         ">Email is required</mat-error>
       <mat-error *ngIf="
-                  signUpForm.get('username')?.errors?.['email']
+                  signUpForm.get('email')?.errors?.['email']
                 ">The format doesn`t look right. Enter correct email.</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">

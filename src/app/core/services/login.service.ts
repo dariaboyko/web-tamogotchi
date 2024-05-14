@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, catchError, throwError } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
@@ -8,6 +8,7 @@ import {
   AccessTokenName,
   IDecodedToken,
   ISignInPayload,
+  ISignUpPayload,
   ITokenResponse,
   RefreshTokenName,
 } from '..';
@@ -23,16 +24,23 @@ export class LoginService {
     @Inject('IDENTITY_URL') private identityUrl: string
   ) {}
 
-  private connectionIdentityURL = this.identityUrl + '/connect/token';
+  private signInURI = this.identityUrl + '/login';
+  private signUpURI = this.identityUrl + '/register';
+  private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 
   public login(payload: ISignInPayload): Observable<ITokenResponse> {
-    const body = new URLSearchParams();
-    body.set('email', payload.email);
-    body.set('password', payload.password);
-
     return this.httpClient.post<ITokenResponse>(
-      this.connectionIdentityURL,
-      body.toString()
+      this.signInURI,
+      JSON.stringify(payload),
+      this.options
+    );
+  }
+
+  public register(payload: ISignUpPayload): Observable<ITokenResponse> {
+    return this.httpClient.post<ITokenResponse>(
+      this.signUpURI,
+      JSON.stringify(payload),
+      this.options
     );
   }
 
@@ -77,7 +85,7 @@ export class LoginService {
     body.set('refresh_token', refreshToken);
 
     return this.httpClient
-      .post<ITokenResponse>(this.connectionIdentityURL, body.toString())
+      .post<ITokenResponse>(this.signInURI, body.toString())
       .pipe(
         catchError(error => {
           this.logout();

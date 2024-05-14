@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { ISignInForm, ISignUpForm } from '@core';
+import { ISignInForm, ISignUpForm, LoginService } from '@core';
 
 @Component({
   selector: 'app-login-form',
@@ -16,13 +16,13 @@ export class LoginFormComponent {
   public showPassword: boolean = false;
   public passwordType: string = 'password';
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService) {
     this.signInForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(7)]],
     });
     this.signUpForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(7)]],
       confirmPassword: ['', Validators.required],
     });
@@ -53,6 +53,10 @@ export class LoginFormComponent {
     this.signInForm.markAllAsTouched();
     this.signInForm.updateValueAndValidity();
     if (this.signInForm.valid) {
+      this.loginService.login({  
+        email: this.signInForm.controls['email'].value ?? '',
+        password: this.signInForm.controls['password'].value ?? ''
+      }).subscribe();
     } else {
       // Handle form validation errors
     }
@@ -61,7 +65,11 @@ export class LoginFormComponent {
   signUp() {
     this.signUpForm.markAllAsTouched();
     if (this.signUpForm.valid) {
-    } else {
+      this.loginService.register({  
+        email: this.signUpForm.controls['email'].value ?? '',
+        password: this.signUpForm.controls['password'].value ?? '',
+        password_confirm: this.signUpForm.controls['password'].value ?? ''
+      }).subscribe();    } else {
       // Handle form validation errors
     }
   }

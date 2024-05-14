@@ -38,4 +38,11 @@ html {
     --mat-form-field-disabled-select-arrow-color: rgba(0, 0, 0, 0.38);
     --mat-form-field-hover-state-layer-opacity: 0.04;
     --mat-form-field-focus-state-layer-opacity: 0.08;
+
+   .snackbar__error{
+        .mdc-snackbar__surface { 
+         --mdc-snackbar-container-color: rgb(236, 206, 204);
+         --mdc-snackbar-supporting-text-color: rgb(43, 14, 13) ;
+         --mat-snack-bar-button-color: rgb(43, 14, 13) ;
+     }}
 }

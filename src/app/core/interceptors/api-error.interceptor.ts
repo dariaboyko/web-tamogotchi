@@ -7,10 +7,13 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import {
+  MatSnackBar,
+} from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
 export class ApiErrorInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private _snackBar: MatSnackBar) {}
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
@@ -18,8 +21,12 @@ export class ApiErrorInterceptor implements HttpInterceptor {
     {
       return next.handle(request).pipe(
         catchError(error => {
-          if (error.status === 500) {
-          }
+          this._snackBar.open(error.error, 'Close', {
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: 'snackbar__error',
+            duration: 5000
+          });
           return throwError(() => error);
         })
       );

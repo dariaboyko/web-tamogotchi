@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  API_URL: 'https://wl-api-adxwlstage.admixer.net/api',
-  IDENTITY_URL: 'https://wl-identity-adxwlstage.admixer.net',
+  API_URL: 'http://localhost:5239/api',
+  IDENTITY_URL: 'http://localhost:5239/api/auth',
 };
