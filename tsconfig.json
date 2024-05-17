@@ -21,7 +21,8 @@
     "lib": ["ES2022", "dom"],
     "baseUrl": "./src",
     "paths": {
-      "@core": ["app/core/index"]
+      "@core": ["app/core/index"],
+      "@shared": ["app/shared/index"]
     }
   },
   "angularCompilerOptions": {

@@ -8,4 +8,4 @@ import { SharedMenuComponent } from './menu.component';
     CommonModule,
   ],
 })
-export class LoginModule {}
+export class SharedMenuModule {}

@@ -7,6 +7,7 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ISignInForm, ISignUpForm, LoginService } from '@core';
 
 @Component({
@@ -25,7 +26,8 @@ export class LoginFormComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ) {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -70,10 +72,12 @@ export class LoginFormComponent {
           email: this.signInForm.controls['email'].value ?? '',
           password: this.signInForm.controls['password'].value ?? '',
         })
-        .subscribe();
-    } else {
-      // Handle form validation errors
-    }
+        .subscribe((resp) => {
+          this.loginService.setToken(resp.access_token);
+          this.loginService.setRefreshToken(resp.refresh_token);
+          this.router.navigate(['']);
+        });
+    } 
   }
 
   signUp() {
@@ -85,9 +89,11 @@ export class LoginFormComponent {
           password: this.signUpForm.controls['password'].value ?? '',
           password_confirm: this.signUpForm.controls['password'].value ?? '',
         })
-        .subscribe();
-    } else {
-      // Handle form validation errors
+        .subscribe((resp) => {
+          this.loginService.setToken(resp.access_token);
+          this.loginService.setRefreshToken(resp.refresh_token);
+          this.router.navigate(['']);
+        });
     }
   }
 

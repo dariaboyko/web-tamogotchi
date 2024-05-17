@@ -22,7 +22,7 @@ export class LoginService {
     private cookieService: CookieService,
     private router: Router,
     @Inject('IDENTITY_URL') private identityUrl: string
-  ) {}
+  ) { }
 
   private signInURI = this.identityUrl + '/login';
   private signUpURI = this.identityUrl + '/register';
@@ -61,6 +61,16 @@ export class LoginService {
   public getRefreshToken(): string {
     return this.cookieService.get(RefreshTokenName);
   }
+
+  public getAccountName(): string {
+    const token = this.cookieService.get(AccessTokenName);
+    const decodedToken = this.decodeToken(token);
+    if (decodedToken) {
+      return decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+    }
+    return 'Unknown Name';
+  }
+
 
   public logout(): void {
     this.cookieService.deleteAll();
