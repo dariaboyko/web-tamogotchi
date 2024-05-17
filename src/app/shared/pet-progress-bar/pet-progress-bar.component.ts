@@ -11,7 +11,6 @@ export class SharedPetProgressBarComponent {
   @Input() progressAmount: number = 0;
 
   get segments() {
-    console.log(this.progressAmount)
     return Array.from({ length: 10 }, (_, i) => (i + 1) * 10);
   }
 }

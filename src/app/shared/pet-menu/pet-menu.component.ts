@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { ISharedPetMenuComponentProps } from '@core';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -19,7 +27,8 @@ export class SharedPetMenuComponent implements OnDestroy {
   public showSpinner: boolean = true;
   public redColor: string = '#EB9393';
 
-  private props$: Subject<ISharedPetMenuComponentProps> = new Subject<ISharedPetMenuComponentProps>();
+  private props$: Subject<ISharedPetMenuComponentProps> =
+    new Subject<ISharedPetMenuComponentProps>();
   private destroy$: Subject<void> = new Subject<void>();
 
   @Output() feedPet: EventEmitter<void> = new EventEmitter<void>();
@@ -34,25 +43,19 @@ export class SharedPetMenuComponent implements OnDestroy {
     this.props$.next(v);
   }
 
-  constructor(
-    private cdr: ChangeDetectorRef
-  ) {
+  constructor(private cdr: ChangeDetectorRef) {
+    this.props$.pipe(takeUntil(this.destroy$)).subscribe(response => {
+      this.title = response.name;
+      this.bore = response.bore;
+      this.dirtiness = response.dirtiness;
+      this.hunger = response.hunger;
+      this.exp = response.exp;
+      this.level = response.level;
+      this.tiredness = response.tiredness;
+      this.showSpinner = false;
 
-    this.props$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((response) => {
-        console.log(response)
-        this.title = response.name;
-        this.bore = response.bore;
-        this.dirtiness = response.dirtiness;
-        this.hunger = response.hunger;
-        this.exp = response.exp;
-        this.level = response.level;
-        this.tiredness = response.tiredness;
-        this.showSpinner = false;
-
-        this.cdr.detectChanges();
-      });
+      this.cdr.detectChanges();
+    });
   }
 
   public feedPetEvent(): void {
