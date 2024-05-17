@@ -1,16 +1,13 @@
 <section class="home">
-  <div class="home--menu">
-    <span>{{ userName }}</span>
-    <button mat-icon-button color="primary" matTooltip="Account Settings">
-      <mat-icon>account_circle</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      color="primary"
-      (click)="logout()"
-      matTooltip="Log Out">
-      <mat-icon>logout</mat-icon>
-    </button>
-  </div>
-  <app-shared-cat-pet></app-shared-cat-pet>
+    <div class="home--menu">
+        <span>{{userName}}</span>
+        <button mat-icon-button color="primary" matTooltip="Account Settings">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="logout()" matTooltip="Log Out">
+            <mat-icon>logout</mat-icon>
+        </button>
+    </div>
+    <app-shared-pet-menu class="home--pet-menu" [props]="petMenu$ | async"></app-shared-pet-menu>
+    <app-shared-cat-pet></app-shared-cat-pet>
 </section>

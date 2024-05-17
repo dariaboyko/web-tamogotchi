@@ -1,0 +1,50 @@
+.pet-menu {
+    background-color: var(--green-background);
+    border-radius: 36px;
+    width: 340px;
+    height: 450px;
+
+    &--main {
+        padding: 25px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        &--title {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        &--li {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            font-size: 20px;
+
+            &__level {
+                font-size: 24px;
+                font-weight: bold;
+
+                div {
+                    display: flex;
+                    gap: 8px;
+                    align-items: flex-end;
+                    height: 30px;
+                }
+
+                &__number {
+                    color: #7B1FA2;
+                    font-size: 30px;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+.pet-menu-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,4 @@
+<ul class="pet-progress-bar">
+    <li *ngFor="let segment of segments" [ngClass]="{'filled': segment <= progressAmount}"
+        [matTooltip]="segment <= progressAmount ? segment + '/100' :''" [style.color]="color"></li>
+</ul>

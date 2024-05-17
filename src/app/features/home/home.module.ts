@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { SharedCatPetModule } from '@shared';
+import { SharedCatPetModule, SharedPetMenuModule } from '@shared';
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -26,7 +26,8 @@ import { SharedCatPetModule } from '@shared';
     MatInputModule,
     MatIconModule,
     SharedCatPetModule,
-    MatTooltipModule
+    MatTooltipModule,
+    SharedPetMenuModule
   ],
 })
 export class HomeModule { }

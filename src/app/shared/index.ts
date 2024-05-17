@@ -1,2 +1,2 @@
 export * from './cat-pet';
-export * from './menu';
+export * from './pet-menu';
