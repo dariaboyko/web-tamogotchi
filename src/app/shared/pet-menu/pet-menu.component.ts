@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ISharedPetMenuComponentProps } from '@core';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -22,6 +22,10 @@ export class SharedPetMenuComponent implements OnDestroy {
   private props$: Subject<ISharedPetMenuComponentProps> = new Subject<ISharedPetMenuComponentProps>();
   private destroy$: Subject<void> = new Subject<void>();
 
+  @Output() feedPet: EventEmitter<void> = new EventEmitter<void>();
+  @Output() playPet: EventEmitter<void> = new EventEmitter<void>();
+  @Output() sleepPet: EventEmitter<void> = new EventEmitter<void>();
+  @Output() washPet: EventEmitter<void> = new EventEmitter<void>();
   @Input()
   set props(v: ISharedPetMenuComponentProps | null) {
     this.showSpinner = true;
@@ -33,7 +37,7 @@ export class SharedPetMenuComponent implements OnDestroy {
   constructor(
     private cdr: ChangeDetectorRef
   ) {
-   
+
     this.props$
       .pipe(takeUntil(this.destroy$))
       .subscribe((response) => {
@@ -46,11 +50,26 @@ export class SharedPetMenuComponent implements OnDestroy {
         this.level = response.level;
         this.tiredness = response.tiredness;
         this.showSpinner = false;
-       
+
         this.cdr.detectChanges();
       });
   }
 
+  public feedPetEvent(): void {
+    this.feedPet.emit();
+  }
+
+  public playPetEvent(): void {
+    this.playPet.emit();
+  }
+
+  public sleepPetEvent(): void {
+    this.sleepPet.emit();
+  }
+
+  public washPetEvent(): void {
+    this.washPet.emit();
+  }
 
   ngOnDestroy() {
     this.destroy$.next();

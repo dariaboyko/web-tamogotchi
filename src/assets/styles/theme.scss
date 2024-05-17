@@ -39,6 +39,13 @@ html {
   --mat-form-field-disabled-select-arrow-color: rgba(0, 0, 0, 0.38);
   --mat-form-field-hover-state-layer-opacity: 0.04;
   --mat-form-field-focus-state-layer-opacity: 0.08;
+  --mdc-icon-button-disabled-icon-color: rgba(0, 0, 0, 0.38);
+  --mat-icon-button-state-layer-color: black;
+  --mat-icon-button-disabled-state-layer-color: black;
+  --mat-icon-button-ripple-color: rgba(0, 0, 0, 0.1);
+  --mat-icon-button-hover-state-layer-opacity: 0.04;
+  --mat-icon-button-focus-state-layer-opacity: 0.12;
+  --mat-icon-button-pressed-state-layer-opacity: 0.12;
 
   .snackbar__error {
     .mdc-snackbar__surface {

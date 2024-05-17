@@ -8,6 +8,7 @@
             <mat-icon>logout</mat-icon>
         </button>
     </div>
-    <app-shared-pet-menu class="home--pet-menu" [props]="petMenu$ | async"></app-shared-pet-menu>
+    <app-shared-pet-menu class="home--pet-menu" [props]="petMenu$ | async" (playPetEvent)="playPet()"
+        (sleepPetEvent)="sleepPet()" (washPetEvent)="washPet()" (feedPetEvent)="feedPet()"></app-shared-pet-menu>
     <app-shared-cat-pet></app-shared-cat-pet>
 </section>

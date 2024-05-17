@@ -48,4 +48,20 @@ export class HomePageComponent implements OnInit {
       dirtiness: 30
     }), 1000)
   }
+
+  public playPet(): void {
+
+  }
+
+  public feedPet(): void {
+
+  }
+
+  public sleepPet(): void {
+
+  }
+
+  public washPet(): void {
+
+  }
 }
