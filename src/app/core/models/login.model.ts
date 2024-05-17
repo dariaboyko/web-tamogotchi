@@ -10,7 +10,7 @@ export interface ISignUpPayload {
 }
 
 export interface ITokenResponse {
-  access_token: string;
+  token: string;
   refresh_token: string;
 }
 

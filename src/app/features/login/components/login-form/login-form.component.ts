@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -72,12 +72,12 @@ export class LoginFormComponent {
           email: this.signInForm.controls['email'].value ?? '',
           password: this.signInForm.controls['password'].value ?? '',
         })
-        .subscribe((resp) => {
-          this.loginService.setToken(resp.access_token);
+        .subscribe(resp => {
+          this.loginService.setToken(resp.token);
           this.loginService.setRefreshToken(resp.refresh_token);
           this.router.navigate(['']);
         });
-    } 
+    }
   }
 
   signUp() {
@@ -89,8 +89,8 @@ export class LoginFormComponent {
           password: this.signUpForm.controls['password'].value ?? '',
           password_confirm: this.signUpForm.controls['password'].value ?? '',
         })
-        .subscribe((resp) => {
-          this.loginService.setToken(resp.access_token);
+        .subscribe(resp => {
+          this.loginService.setToken(resp.token);
           this.loginService.setRefreshToken(resp.refresh_token);
           this.router.navigate(['']);
         });

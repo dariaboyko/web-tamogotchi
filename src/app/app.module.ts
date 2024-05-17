@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { environment } from 'environments/environment';
-import { CookieService } from 'ngx-cookie-service';
 import { AppComponent } from './app.component';
 import {
   TokenInterceptor,

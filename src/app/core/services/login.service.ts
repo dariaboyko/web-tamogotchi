@@ -22,7 +22,7 @@ export class LoginService {
     private cookieService: CookieService,
     private router: Router,
     @Inject('IDENTITY_URL') private identityUrl: string
-  ) { }
+  ) {}
 
   private signInURI = this.identityUrl + '/login';
   private signUpURI = this.identityUrl + '/register';
@@ -66,11 +66,12 @@ export class LoginService {
     const token = this.cookieService.get(AccessTokenName);
     const decodedToken = this.decodeToken(token);
     if (decodedToken) {
-      return decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+      return decodedToken[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
+      ];
     }
     return 'Unknown Name';
   }
-
 
   public logout(): void {
     this.cookieService.deleteAll();
@@ -83,11 +84,11 @@ export class LoginService {
     const expirationDate = this.getExpirationDate(accessToken);
     if (!expirationDate) return true;
     const oneHour = 60 * 60 * 1000;
-    const currentTimeInUtc = new Date().toUTCString();
-    const currentTimeInUtcMilliseconds = Date.parse(currentTimeInUtc);
+    const currentTimeMilliseconds = new Date().getMilliseconds();
+
     return (
       expirationDate &&
-      expirationDate.getTime() - currentTimeInUtcMilliseconds < oneHour
+      expirationDate.getTime() - currentTimeMilliseconds < oneHour
     );
   }
 
