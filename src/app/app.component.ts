@@ -1,12 +1,22 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
+import {
+  NavigationEnd,
+  Router,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
 import { filter, Subscription } from 'rxjs';
-import { ApiErrorInterceptor, ApiInterceptor, LoginService, TokenInterceptor } from '@core';
+import {
+  ApiErrorInterceptor,
+  ApiInterceptor,
+  LoginService,
+  TokenInterceptor,
+} from '@core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnDestroy {
   title = 'Admixer.WL.UI';

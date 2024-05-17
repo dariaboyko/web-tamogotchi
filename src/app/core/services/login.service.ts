@@ -26,7 +26,9 @@ export class LoginService {
 
   private signInURI = this.identityUrl + '/login';
   private signUpURI = this.identityUrl + '/register';
-  private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  private options = {
+    headers: new HttpHeaders().set('Content-Type', 'application/json'),
+  };
 
   public login(payload: ISignInPayload): Observable<ITokenResponse> {
     return this.httpClient.post<ITokenResponse>(

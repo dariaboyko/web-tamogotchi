@@ -1,12 +1,19 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { ISignInForm, ISignUpForm, LoginService } from '@core';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent {
   public signInForm: FormGroup<ISignInForm>;
@@ -16,7 +23,10 @@ export class LoginFormComponent {
   public showPassword: boolean = false;
   public passwordType: string = 'password';
 
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private loginService: LoginService
+  ) {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(7)]],
@@ -28,7 +38,9 @@ export class LoginFormComponent {
     });
 
     this.passwordMatchValidator = this.passwordMatchValidator.bind(this);
-    this.signUpForm.get('confirmPassword')?.setValidators(this.passwordMatchValidator);
+    this.signUpForm
+      .get('confirmPassword')
+      ?.setValidators(this.passwordMatchValidator);
   }
 
   public markControlAsUntouched(control: FormControl): void {
@@ -53,10 +65,12 @@ export class LoginFormComponent {
     this.signInForm.markAllAsTouched();
     this.signInForm.updateValueAndValidity();
     if (this.signInForm.valid) {
-      this.loginService.login({  
-        email: this.signInForm.controls['email'].value ?? '',
-        password: this.signInForm.controls['password'].value ?? ''
-      }).subscribe();
+      this.loginService
+        .login({
+          email: this.signInForm.controls['email'].value ?? '',
+          password: this.signInForm.controls['password'].value ?? '',
+        })
+        .subscribe();
     } else {
       // Handle form validation errors
     }
@@ -65,11 +79,14 @@ export class LoginFormComponent {
   signUp() {
     this.signUpForm.markAllAsTouched();
     if (this.signUpForm.valid) {
-      this.loginService.register({  
-        email: this.signUpForm.controls['email'].value ?? '',
-        password: this.signUpForm.controls['password'].value ?? '',
-        password_confirm: this.signUpForm.controls['password'].value ?? ''
-      }).subscribe();    } else {
+      this.loginService
+        .register({
+          email: this.signUpForm.controls['email'].value ?? '',
+          password: this.signUpForm.controls['password'].value ?? '',
+          password_confirm: this.signUpForm.controls['password'].value ?? '',
+        })
+        .subscribe();
+    } else {
       // Handle form validation errors
     }
   }
@@ -83,11 +100,13 @@ export class LoginFormComponent {
     const newPassword = this.generatePassword();
     this.signUpForm.patchValue({
       password: newPassword,
-      confirmPassword: newPassword
+      confirmPassword: newPassword,
     });
   }
 
-  private passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+  private passwordMatchValidator(
+    control: AbstractControl
+  ): ValidationErrors | null {
     const passwordControl = this.signUpForm.get('password');
     const confirmPasswordControl = control;
 
@@ -95,7 +114,10 @@ export class LoginFormComponent {
       return null;
     }
 
-    if (confirmPasswordControl.value === null || confirmPasswordControl.value === '') {
+    if (
+      confirmPasswordControl.value === null ||
+      confirmPasswordControl.value === ''
+    ) {
       return { required: true };
     }
 
@@ -105,13 +127,13 @@ export class LoginFormComponent {
   }
 
   private generatePassword(length: number = 7): string {
-    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-    let password = "";
+    const charset =
+      'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+';
+    let password = '';
     for (let i = 0; i < length; i++) {
       const randomIndex = Math.floor(Math.random() * charset.length);
       password += charset[randomIndex];
     }
     return password;
   }
-
 }
