@@ -38,54 +38,50 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.updatePet();
-    // this.pet = {
-    //   id: '93fd03b2-6371-4d0e-8ca4-d39baeccc9ef',
-    //   name: 'Pet',
-    //   level: 1,
-    //   expToLevelUp: 80,
-    //   bore: 0,
-    //   hunger: 60,
-    //   tiredness: 40,
-    //   dirtiness: 30,
-    //   owner: null,
-    // };
-    // setTimeout(
-    //   () =>
-    //     this.petMenu$.next({
-    //       name: 'Pet',
-    //       level: 1,
-    //       exp: 20,
-    //       bore: 0,
-    //       hunger: 60,
-    //       tiredness: 40,
-    //       dirtiness: 30,
-    //     }),
-    //   1000
-    // );
   }
 
   public playPet(): void {
-    this.petService
-      .playPet(this.petId, this.gameId)
-      .subscribe(resp => this.updatePet(resp));
+    this.petState$.next(EPetState.Playing);
+    setTimeout(
+      () =>
+        this.petService
+          .playPet(this.petId, this.gameId)
+          .subscribe(resp => this.updatePet(resp)),
+      5000
+    );
   }
 
   public feedPet(): void {
-    this.petService
-      .feedPet(this.petId, this.foodId)
-      .subscribe(resp => this.updatePet(resp));
+    this.petState$.next(EPetState.Eating);
+    setTimeout(
+      () =>
+        this.petService
+          .feedPet(this.petId, this.foodId)
+          .subscribe(resp => this.updatePet(resp)),
+      5000
+    );
   }
 
   public sleepPet(): void {
-    this.petService
-      .sleepPet(this.petId, this.bedroomId)
-      .subscribe(resp => this.updatePet(resp));
+    this.petState$.next(EPetState.Sleeping);
+    setTimeout(
+      () =>
+        this.petService
+          .sleepPet(this.petId, this.bedroomId)
+          .subscribe(resp => this.updatePet(resp)),
+      5000
+    );
   }
 
   public washPet(): void {
-    this.petService
-      .washPet(this.petId, this.bathroomId)
-      .subscribe(resp => this.updatePet(resp));
+    this.petState$.next(EPetState.Washing);
+    setTimeout(
+      () =>
+        this.petService
+          .washPet(this.petId, this.bathroomId)
+          .subscribe(resp => this.updatePet(resp)),
+      5000
+    );
   }
 
   private updatePet(pet?: IPet): void {

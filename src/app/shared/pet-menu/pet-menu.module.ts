@@ -16,7 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SharedPetProgressBarModule,
     MatIconModule,
     MatButtonModule,
-    MatTooltipModule
+    MatTooltipModule,
   ],
 })
-export class SharedPetMenuModule { }
+export class SharedPetMenuModule {}

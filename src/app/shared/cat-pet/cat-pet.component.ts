@@ -13,6 +13,11 @@ import {
   CatHungrySrc,
   CatTiredSrc,
   CatDirtySrc,
+  CatWashingSrc,
+  CatSleepingSrc,
+  CatEatingSrc,
+  CatHappySrc,
+  CatBoredSrc,
 } from '@core';
 import { EPetState } from 'app/core/enums';
 
@@ -106,25 +111,33 @@ export class SharedCatPetComponent implements OnDestroy, OnInit {
         this.maxHeightClass.next(false);
         break;
       case EPetState.Bored:
-        console.log('Pet is bored.');
+        this.srcString.next(CatBoredSrc);
+        this.maxHeightClass.next(true);
         break;
       case EPetState.Happy:
-        console.log('Pet is happy.');
+        this.srcString.next(CatHappySrc);
+        this.maxHeightClass.next(false);
         break;
       case EPetState.Eating:
-        console.log('Pet is eating.');
+        this.srcString.next(CatEatingSrc);
+        this.maxHeightClass.next(false);
         break;
       case EPetState.Sleeping:
-        console.log('Pet is sleeping.');
+        this.srcString.next(CatSleepingSrc);
+        this.maxHeightClass.next(false);
         break;
       case EPetState.Playing:
-        console.log('Pet is playing.');
+        this.srcString.next(CatHappySrc);
+        this.maxHeightClass.next(false);
         break;
       case EPetState.Washing:
-        console.log('Pet is being washed.');
+        this.srcString.next(CatWashingSrc);
+        this.maxHeightClass.next(false);
         break;
       default:
-        console.log('Unknown pet state.');
+        this.srcString.next(CatDefaultSrc);
+        this.startBlinking();
+        this.maxHeightClass.next(true);
     }
   }
 }

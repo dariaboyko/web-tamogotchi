@@ -7,10 +7,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [SharedPetProgressBarComponent],
   exports: [SharedPetProgressBarComponent],
-  imports: [
-    CommonModule,
-    MatProgressSpinnerModule,
-    MatTooltipModule
-  ],
+  imports: [CommonModule, MatProgressSpinnerModule, MatTooltipModule],
 })
-export class SharedPetProgressBarModule { }
+export class SharedPetProgressBarModule {}

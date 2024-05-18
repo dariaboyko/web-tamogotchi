@@ -1,53 +1,87 @@
 <div class="pet-menu" [class.pet-menu-center]="showSpinner">
-    <mat-spinner *ngIf="showSpinner"></mat-spinner>
-    <ng-container *ngIf="!showSpinner">
-        <ul class="pet-menu--main">
-            <li class="pet-menu--main--title">{{title}}</li>
-            <li class="pet-menu--main--li pet-menu--main--li__level">
-                <div><span>Level </span><span class="pet-menu--main--li__level__number">{{level}}</span></div>
-                <app-shared-pet-progress-bar [progressAmount]="exp"></app-shared-pet-progress-bar>
-            </li>
-            <li class="pet-menu--main--li">
-                <div>Bore</div>
-                <app-shared-pet-progress-bar [progressAmount]="bore" [color]="redColor"></app-shared-pet-progress-bar>
-            </li>
-            <li class="pet-menu--main--li">
-                <div>Hunger</div>
-                <app-shared-pet-progress-bar [progressAmount]="hunger" [color]="redColor"></app-shared-pet-progress-bar>
-            </li>
-            <li class="pet-menu--main--li">
-                <div>Dirtiness</div>
-                <app-shared-pet-progress-bar [progressAmount]="dirtiness"
-                    [color]="redColor"></app-shared-pet-progress-bar>
-            </li>
-            <li class="pet-menu--main--li">
-                <div>Tiredness</div>
-                <app-shared-pet-progress-bar [progressAmount]="tiredness"
-                    [color]="redColor"></app-shared-pet-progress-bar>
-            </li>
-        </ul>
-    </ng-container>
+  <mat-spinner *ngIf="showSpinner"></mat-spinner>
+  <ng-container *ngIf="!showSpinner">
+    <ul class="pet-menu--main">
+      <li class="pet-menu--main--title">{{ title }}</li>
+      <li class="pet-menu--main--li pet-menu--main--li__level">
+        <div>
+          <span>Level </span
+          ><span class="pet-menu--main--li__level__number">{{ level }}</span>
+        </div>
+        <app-shared-pet-progress-bar
+          [progressAmount]="exp"></app-shared-pet-progress-bar>
+      </li>
+      <li class="pet-menu--main--li">
+        <div>Bore</div>
+        <app-shared-pet-progress-bar
+          [progressAmount]="bore"
+          [color]="redColor"></app-shared-pet-progress-bar>
+      </li>
+      <li class="pet-menu--main--li">
+        <div>Hunger</div>
+        <app-shared-pet-progress-bar
+          [progressAmount]="hunger"
+          [color]="redColor"></app-shared-pet-progress-bar>
+      </li>
+      <li class="pet-menu--main--li">
+        <div>Dirtiness</div>
+        <app-shared-pet-progress-bar
+          [progressAmount]="dirtiness"
+          [color]="redColor"></app-shared-pet-progress-bar>
+      </li>
+      <li class="pet-menu--main--li">
+        <div>Tiredness</div>
+        <app-shared-pet-progress-bar
+          [progressAmount]="tiredness"
+          [color]="redColor"></app-shared-pet-progress-bar>
+      </li>
+    </ul>
+  </ng-container>
 </div>
 <div class="action-menu" *ngIf="!showSpinner">
-    <div [matTooltip]="bore < 10 ? title + ' is not bored': 'Play'" [matTooltipDisabled]="false">
-        <button mat-icon-button color="primary" [disabled]="bore < 10" (click)="playPetEvent()">
-            <mat-icon>pest_control_rodent</mat-icon>
-        </button>
-    </div>
-    <div [matTooltip]="hunger < 10 ? title + ' is not hungry': 'Feed'" [matTooltipDisabled]="false">
-        <button mat-icon-button color="primary" matTooltipDisabled="Hunger is 0" [disabled]="hunger < 10"
-            (click)="feedPetEvent()">
-            <mat-icon>fastfood</mat-icon>
-        </button>
-    </div>
-    <div [matTooltip]="dirtiness < 10 ? title + ' is not dirty': 'Take Bath'" [matTooltipDisabled]="false">
-        <button mat-icon-button color="primary" [disabled]="dirtiness < 10" (click)="washPetEvent()">
-            <mat-icon>bathtub</mat-icon>
-        </button>
-    </div>
-    <div [matTooltip]="tiredness < 60 ? title + ' is not tired': 'Go Sleep'" [matTooltipDisabled]="false">
-        <button mat-icon-button color="primary" [disabled]="tiredness < 60" (click)="sleepPetEvent()">
-            <mat-icon>nights_stay</mat-icon>
-        </button>
-    </div>
+  <div
+    [matTooltip]="bore < 10 ? title + ' is not bored' : 'Play'"
+    [matTooltipDisabled]="false">
+    <button
+      mat-icon-button
+      color="primary"
+      [disabled]="bore < 10"
+      (click)="playPetEvent()">
+      <mat-icon>pest_control_rodent</mat-icon>
+    </button>
+  </div>
+  <div
+    [matTooltip]="hunger < 10 ? title + ' is not hungry' : 'Feed'"
+    [matTooltipDisabled]="false">
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltipDisabled="Hunger is 0"
+      [disabled]="hunger < 10"
+      (click)="feedPetEvent()">
+      <mat-icon>fastfood</mat-icon>
+    </button>
+  </div>
+  <div
+    [matTooltip]="dirtiness < 10 ? title + ' is not dirty' : 'Take Bath'"
+    [matTooltipDisabled]="false">
+    <button
+      mat-icon-button
+      color="primary"
+      [disabled]="dirtiness < 10"
+      (click)="washPetEvent()">
+      <mat-icon>bathtub</mat-icon>
+    </button>
+  </div>
+  <div
+    [matTooltip]="tiredness < 60 ? title + ' is not tired' : 'Go Sleep'"
+    [matTooltipDisabled]="false">
+    <button
+      mat-icon-button
+      color="primary"
+      [disabled]="tiredness < 60"
+      (click)="sleepPetEvent()">
+      <mat-icon>nights_stay</mat-icon>
+    </button>
+  </div>
 </div>

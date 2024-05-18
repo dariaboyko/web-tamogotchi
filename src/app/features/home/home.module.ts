@@ -27,7 +27,7 @@ import { SharedCatPetModule, SharedPetMenuModule } from '@shared';
     MatIconModule,
     SharedCatPetModule,
     MatTooltipModule,
-    SharedPetMenuModule
+    SharedPetMenuModule,
   ],
 })
-export class HomeModule { }
+export class HomeModule {}
