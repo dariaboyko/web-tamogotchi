@@ -8,7 +8,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { ISharedPetMenuComponentProps } from '@core';
-import { Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-shared-pet-menu',
@@ -26,6 +26,7 @@ export class SharedPetMenuComponent implements OnDestroy {
   public tiredness!: number;
   public showSpinner: boolean = true;
   public redColor: string = '#EB9393';
+  public disabledButtons: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   private props$: Subject<ISharedPetMenuComponentProps> =
     new Subject<ISharedPetMenuComponentProps>();
@@ -60,18 +61,27 @@ export class SharedPetMenuComponent implements OnDestroy {
 
   public feedPetEvent(): void {
     this.feedPet.emit();
+    this.disableButtons();
   }
 
   public playPetEvent(): void {
     this.playPet.emit();
+    this.disableButtons();
   }
 
   public sleepPetEvent(): void {
     this.sleepPet.emit();
+    this.disableButtons();
   }
 
   public washPetEvent(): void {
     this.washPet.emit();
+    this.disableButtons();
+  }
+
+  private disableButtons(): void {
+    this.disabledButtons.next(true);
+    setTimeout(() => this.disabledButtons.next(false), 4000);
   }
 
   ngOnDestroy() {

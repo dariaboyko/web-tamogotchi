@@ -47,7 +47,7 @@ export class HomePageComponent implements OnInit {
         this.petService
           .playPet(this.petId, this.gameId)
           .subscribe(resp => this.updatePet(resp)),
-      5000
+      4000
     );
   }
 
@@ -58,7 +58,7 @@ export class HomePageComponent implements OnInit {
         this.petService
           .feedPet(this.petId, this.foodId)
           .subscribe(resp => this.updatePet(resp)),
-      5000
+      4000
     );
   }
 
@@ -69,7 +69,7 @@ export class HomePageComponent implements OnInit {
         this.petService
           .sleepPet(this.petId, this.bedroomId)
           .subscribe(resp => this.updatePet(resp)),
-      5000
+      4000
     );
   }
 
@@ -80,7 +80,7 @@ export class HomePageComponent implements OnInit {
         this.petService
           .washPet(this.petId, this.bathroomId)
           .subscribe(resp => this.updatePet(resp)),
-      5000
+      4000
     );
   }
 
@@ -126,6 +126,7 @@ export class HomePageComponent implements OnInit {
     if (pet.hunger > 50) this.petState$.next(EPetState.Hungry);
     else if (pet.dirtiness > 50) this.petState$.next(EPetState.Dirty);
     else if (pet.tiredness > 50) this.petState$.next(EPetState.Tired);
+    else if (pet.bore > 50) this.petState$.next(EPetState.Bored);
   }
 
   private lvlUp(): void {

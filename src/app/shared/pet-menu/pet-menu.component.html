@@ -40,46 +40,69 @@
 </div>
 <div class="action-menu" *ngIf="!showSpinner">
   <div
-    [matTooltip]="bore < 10 ? title + ' is not bored' : 'Play'"
+    [matTooltip]="
+      bore < 10 || (disabledButtons | async)
+        ? (disabledButtons | async)
+          ? title + ' is busy'
+          : title + ' is not bored'
+        : 'Play'
+    "
     [matTooltipDisabled]="false">
     <button
       mat-icon-button
       color="primary"
-      [disabled]="bore < 10"
+      [disabled]="bore < 10 || (disabledButtons | async)"
       (click)="playPetEvent()">
       <mat-icon>pest_control_rodent</mat-icon>
     </button>
   </div>
   <div
-    [matTooltip]="hunger < 10 ? title + ' is not hungry' : 'Feed'"
+    [matTooltip]="
+      hunger < 10 || (disabledButtons | async)
+        ? (disabledButtons | async)
+          ? title + ' is busy'
+          : title + ' is not hungry'
+        : 'Feed'
+    "
     [matTooltipDisabled]="false">
     <button
       mat-icon-button
       color="primary"
-      matTooltipDisabled="Hunger is 0"
-      [disabled]="hunger < 10"
+      [disabled]="hunger < 10 || (disabledButtons | async)"
       (click)="feedPetEvent()">
       <mat-icon>fastfood</mat-icon>
     </button>
   </div>
   <div
-    [matTooltip]="dirtiness < 10 ? title + ' is not dirty' : 'Take Bath'"
+    [matTooltip]="
+      dirtiness < 10 || (disabledButtons | async)
+        ? (disabledButtons | async)
+          ? title + ' is busy'
+          : title + ' is not dirty'
+        : 'Take Bath'
+    "
     [matTooltipDisabled]="false">
     <button
       mat-icon-button
       color="primary"
-      [disabled]="dirtiness < 10"
+      [disabled]="dirtiness < 10 || (disabledButtons | async)"
       (click)="washPetEvent()">
       <mat-icon>bathtub</mat-icon>
     </button>
   </div>
   <div
-    [matTooltip]="tiredness < 60 ? title + ' is not tired' : 'Go Sleep'"
+    [matTooltip]="
+      tiredness < 60 || (disabledButtons | async)
+        ? (disabledButtons | async)
+          ? title + ' is busy'
+          : title + ' is not tired'
+        : 'Go Sleep'
+    "
     [matTooltipDisabled]="false">
     <button
       mat-icon-button
       color="primary"
-      [disabled]="tiredness < 60"
+      [disabled]="tiredness < 60 || (disabledButtons | async)"
       (click)="sleepPetEvent()">
       <mat-icon>nights_stay</mat-icon>
     </button>

@@ -1,3 +1,11 @@
-<div class="pet" [class.max-height]="maxHeightClass | async">
+<div
+  class="pet"
+  [class.max-height]="maxHeightClass | async"
+  [class.washing]="
+    (srcString | async) === CatWashingSrc ||
+    (srcString | async) === CatSleepingSrc
+  "
+  [class.feeding]="(srcString | async) === CatEatingSrc"
+  [class.playing]="(srcString | async) === CatHappySrc">
   <img [src]="srcString | async" alt="cat-in-hat" />
 </div>

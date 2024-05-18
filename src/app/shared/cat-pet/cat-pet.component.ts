@@ -34,6 +34,10 @@ export class SharedCatPetComponent implements OnDestroy, OnInit {
   public srcString: BehaviorSubject<string> = new BehaviorSubject(
     CatDefaultSrc
   );
+  public CatWashingSrc = CatWashingSrc;
+  public CatSleepingSrc = CatSleepingSrc;
+  public CatEatingSrc = CatEatingSrc;
+  public CatHappySrc = CatHappySrc;
   private intervalId: any;
   private timeouts: any[] = [];
 
@@ -132,7 +136,7 @@ export class SharedCatPetComponent implements OnDestroy, OnInit {
         break;
       case EPetState.Washing:
         this.srcString.next(CatWashingSrc);
-        this.maxHeightClass.next(false);
+        this.maxHeightClass.next(true);
         break;
       default:
         this.srcString.next(CatDefaultSrc);
