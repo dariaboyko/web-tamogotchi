@@ -91,3 +91,27 @@
 .mat-typography {
   font-family: 'Poppins', sans-serif;
 }
+
+.mat-expansion-panel {
+  --mat-expansion-container-background-color: var(--green-background);
+  --mat-expansion-container-text-color: #32323c;
+  --mat-expansion-header-text-color: #32323c;
+  --mat-expansion-header-description-color: #32323c;
+  --mat-expansion-header-indicator-color: #32323c;
+  --mat-expansion-container-shape: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px !important;
+  font-family: 'Poppins', sans-serif;
+  border: 0 !important;
+}
+
+.mat-expansion-panel-header-title {
+  font-family: 'Poppins', sans-serif;
+}
+
+.mat-expansion-panel-header {
+  padding: 0 10px !important;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 10px 10px !important;
+}

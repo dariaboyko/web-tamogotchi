@@ -55,3 +55,24 @@ html {
     }
   }
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+@-moz-document url-prefix() {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #7b1fa280 transparent;
+  }
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #7b1fa280;
+  border-radius: 5px;
+}

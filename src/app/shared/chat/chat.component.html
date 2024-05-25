@@ -1,0 +1,32 @@
+<mat-accordion class="chat">
+  <mat-expansion-panel (opened)="toggleChat(true)" (closed)="toggleChat(false)" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Chat with {{ petName }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="chat-window">
+      <ul class="messages">
+        <ng-container *ngFor="let message of messages">
+          <li *ngIf="message.sender === EChatSender.User" class="message message__user">
+            <span class="message__sender">You:</span>
+            <span class="message__text">{{ message.message }}</span>
+          </li>
+          <li *ngIf="message.sender === EChatSender.Bot" class="message message__bot">
+            <span class="message__sender">{{petName}}:</span>
+            <span class="message__text">{{ message.message }}</span>
+          </li>
+        </ng-container>
+      </ul>
+      <div class="input">
+        <mat-form-field class="message-input" appearance="outline">
+          <input matInput [(ngModel)]="userMessage" (keydown.enter)="sendMessage()" placeholder="Type a message..." />
+        </mat-form-field>
+        <button mat-icon-button color="primary" (click)="sendMessage()">
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
