@@ -20,5 +20,5 @@
     (washPet)="washPet()"
     (feedPet)="feedPet()"></app-shared-pet-menu>
   <app-shared-cat-pet [petState]="petState$"></app-shared-cat-pet>
-  <app-shared-chat class="home--chat"></app-shared-chat>
+  <app-shared-chat class="home--chat" [props]="chatProps$ | async"></app-shared-chat>
 </section>

@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ISharedPetMenuComponentProps, LoginService, PetService } from '@core';
+import {
+  ISharedChatComponentProps,
+  ISharedPetMenuComponentProps,
+  LoginService,
+  PetService,
+} from '@core';
 import { EPetState } from 'app/core/enums';
 import { IPet } from 'app/core/models/pet.model';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -18,6 +23,8 @@ export class HomePageComponent implements OnInit {
   public petState$: BehaviorSubject<EPetState> = new BehaviorSubject<EPetState>(
     EPetState.Default
   );
+  public chatProps$: Subject<ISharedChatComponentProps> =
+    new Subject<ISharedChatComponentProps>();
 
   private petId: string = '93fd03b2-6371-4d0e-8ca4-d39baeccc9ef';
   private foodId: string = 'ccc45d09-d042-42fe-bf7c-3a77e4263a90';
@@ -101,6 +108,7 @@ export class HomePageComponent implements OnInit {
         tiredness: pet.tiredness,
         dirtiness: pet.dirtiness,
       });
+      this.chatProps$.next({ petName: pet.name });
     } else
       this.petService.getPet(this.petId).subscribe(response => {
         if (response.expToLevelUp === 0) {
@@ -118,6 +126,7 @@ export class HomePageComponent implements OnInit {
           tiredness: response.tiredness,
           dirtiness: response.dirtiness,
         });
+        this.chatProps$.next({ petName: response.name });
       });
   }
 

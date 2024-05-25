@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  Input,
   OnDestroy,
 } from '@angular/core';
 import { IChatMessage, ISharedChatComponentProps } from '@core';
@@ -26,6 +27,7 @@ export class SharedPetChatComponent implements OnDestroy {
     new Subject<ISharedChatComponentProps>();
   private destroy$: Subject<void> = new Subject<void>();
 
+  @Input()
   set props(v: ISharedChatComponentProps | null) {
     if (!v) return;
     this.props$.next(v);
@@ -51,9 +53,25 @@ export class SharedPetChatComponent implements OnDestroy {
         message: this.userMessage,
         sender: EChatSender.User,
       });
-      this.chatService.sendMessage(this.userMessage.trim()).subscribe(resp => {
-        this.messages.push({ message: resp, sender: EChatSender.Bot });
-      });
+      const scrollDiv = document.getElementById('scroll');
+      if (scrollDiv) {
+        scrollDiv.scrollIntoView();
+      }
+      const history = [...this.messages];
+      history.pop();
+      this.chatService
+        .sendMessage(
+          this.userMessage.trim(),
+          history.map(el => el.message).join('\n ')
+        )
+        .subscribe(resp => {
+          this.messages.push({ message: resp, sender: EChatSender.Bot });
+          this.cdr.detectChanges();
+          const scrollDiv = document.getElementById('scroll');
+          if (scrollDiv) {
+            scrollDiv.scrollIntoView();
+          }
+        });
       this.userMessage = '';
     }
   }
