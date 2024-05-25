@@ -1,4 +1,4 @@
-import { EChatSender } from "app/core/enums";
+import { EChatSender } from 'app/core/enums';
 
 export interface ISharedChatComponentProps {
   petName: string;

@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ChatService } from './chat.service';
 
 @NgModule({
   declarations: [SharedPetChatComponent],
@@ -26,7 +27,8 @@ import { MatInputModule } from '@angular/material/input';
     MatExpansionModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
   ],
+  providers: [ChatService],
 })
-export class SharedChatModule { }
+export class SharedChatModule {}

@@ -7,6 +7,7 @@ import {
 import { IChatMessage, ISharedChatComponentProps } from '@core';
 import { EChatSender } from 'app/core/enums';
 import { Subject, takeUntil } from 'rxjs';
+import { ChatService } from './chat.service';
 
 @Component({
   selector: 'app-shared-chat',
@@ -21,7 +22,8 @@ export class SharedPetChatComponent implements OnDestroy {
   public userMessage: string = '';
   public EChatSender = EChatSender;
 
-  private props$: Subject<ISharedChatComponentProps> = new Subject<ISharedChatComponentProps>();
+  private props$: Subject<ISharedChatComponentProps> =
+    new Subject<ISharedChatComponentProps>();
   private destroy$: Subject<void> = new Subject<void>();
 
   set props(v: ISharedChatComponentProps | null) {
@@ -29,8 +31,11 @@ export class SharedPetChatComponent implements OnDestroy {
     this.props$.next(v);
   }
 
-  constructor(private cdr: ChangeDetectorRef) {
-    this.props$.pipe(takeUntil(this.destroy$)).subscribe((response) => {
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private chatService: ChatService
+  ) {
+    this.props$.pipe(takeUntil(this.destroy$)).subscribe(response => {
       this.petName = response.petName;
       this.cdr.detectChanges();
     });
@@ -42,8 +47,13 @@ export class SharedPetChatComponent implements OnDestroy {
 
   sendMessage() {
     if (this.userMessage.trim()) {
-      this.messages.push({ message: this.userMessage, sender: EChatSender.User });
-      this.messages.push({ message: 'Hello', sender: EChatSender.Bot });
+      this.messages.push({
+        message: this.userMessage,
+        sender: EChatSender.User,
+      });
+      this.chatService.sendMessage(this.userMessage.trim()).subscribe(resp => {
+        this.messages.push({ message: resp, sender: EChatSender.Bot });
+      });
       this.userMessage = '';
     }
   }

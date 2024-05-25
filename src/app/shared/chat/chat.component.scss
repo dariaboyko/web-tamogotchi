@@ -1,9 +1,17 @@
 .chat {
-
   ::ng-deep.mat-expansion-panel {
     width: 345px;
     max-width: 345px;
     min-width: 345px;
+  }
+
+  .no-messages {
+    display: flex;
+    height: 328px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
   }
 
   .messages {
@@ -14,7 +22,8 @@
     flex-direction: column;
     gap: 10px;
     overflow: auto;
-    max-height: 305px;
+    height: 313px;
+    max-height: 313px;
   }
 
   .message {
